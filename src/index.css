@@ -1,0 +1,498 @@
+:root {
+    /* Variáveis do modo claro */
+    --cor-fundo: #f8fafc;
+    --cor-fundo-cartao: #ffffff;
+    --cor-texto: #1e293b;
+    --cor-texto-secundario: #64748b;
+    --cor-borda: #e2e8f0;
+    --cor-borda-suave: #f1f5f9;
+    --cor-borda-tabela: rgba(248, 250, 252, 0.5);
+    --cor-hover-tabela: rgba(248, 250, 252, 0.7);
+    --cor-primaria: #4f46e5;
+    --cor-primaria-hover: #4338ca;
+    --cor-sucesso: #10b981;
+    --cor-sucesso-fundo: #ecfdf5;
+    --cor-perigo: #f43f5e;
+    --cor-perigo-fundo: #fff1f2;
+    --cor-aviso: #f59e0b;
+}
+
+/* Modo escuro alternado pela classe no HTML */
+:root.tema-escuro {
+    --cor-fundo: #0f172a;
+    --cor-fundo-cartao: #1e293b;
+    --cor-texto: #f8fafc;
+    --cor-texto-secundario: #94a3b8;
+    --cor-borda: #334155;
+    --cor-borda-suave: #0f172a;
+    --cor-borda-tabela: rgba(15, 23, 42, 0.5);
+    --cor-hover-tabela: rgba(30, 41, 59, 0.7);
+    --cor-primaria: #818cf8;
+    --cor-primaria-hover: #6366f1;
+    --cor-sucesso-fundo: rgba(16, 185, 129, 0.15);
+    --cor-perigo-fundo: rgba(244, 63, 94, 0.15);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: system-ui, -apple-system, sans-serif;
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.painel-principal {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+
+    @media (min-width: 1024px) {
+        flex-direction: row;
+    }
+}
+
+.barra-lateral {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border-right: 1px solid var(--cor-borda);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    background-color: var(--cor-fundo-cartao);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+
+    @media (min-width: 1024px) {
+        width: 20rem;
+        height: 100vh;
+    }
+
+    & .cabecalho-barra-lateral {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 1.5rem;
+        border-bottom: 1px solid var(--cor-borda-suave);
+        transition: border-color 0.3s ease;
+
+        & .icone-cabecalho {
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            background-color: var(--cor-primaria);
+            color: #ffffff;
+            transition: background-color 0.3s ease;
+        }
+
+        & h1 {
+            margin: 0;
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+    }
+
+    & .conteudo-barra-lateral {
+        flex: 1;
+        padding: 1.5rem;
+        overflow-y: auto;
+
+        & .cabecalho-formulario {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+
+            & h2 {
+                margin: 0;
+                font-size: 0.875rem;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+                color: var(--cor-texto-secundario);
+            }
+
+            & svg {
+                color: var(--cor-texto-secundario);
+            }
+        }
+
+        & .formulario-cliente {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+
+            & .grupo-entrada {
+                & .rotulo-entrada {
+                    display: block;
+                    margin-bottom: 0.25rem;
+                    font-size: 0.875rem;
+                    font-weight: 500;
+                }
+
+                & .campo-entrada {
+                    width: 100%;
+                    padding: 0.5rem 1rem;
+                    border: 1px solid var(--cor-borda);
+                    border-radius: 0.5rem;
+                    background-color: var(--cor-fundo);
+                    color: var(--cor-texto);
+                    box-sizing: border-box;
+                    outline: none;
+                    transition: all 0.2s;
+
+                    &:focus {
+                        border-color: var(--cor-primaria);
+                        box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2);
+                    }
+                }
+            }
+
+            & .botao-processar {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 0.5rem;
+                width: 100%;
+                margin-top: 1rem;
+                padding: 0.625rem;
+                border: none;
+                border-radius: 0.5rem;
+                box-shadow: 0 1px 2px rgba(79, 70, 229, 0.2);
+                background-color: var(--cor-primaria);
+                color: #ffffff;
+                font-weight: 500;
+                cursor: pointer;
+                transition: background-color 0.2s;
+
+                &:hover {
+                    background-color: var(--cor-primaria-hover);
+                }
+            }
+        }
+
+        & .caixa-total-registos {
+            position: relative;
+            margin-top: 2rem;
+            padding: 1rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--cor-borda-suave);
+            border: 1px solid var(--cor-borda-suave);
+            border-radius: 0.75rem;
+            background-color: var(--cor-fundo);
+            overflow: hidden;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+
+            & .icone-fundo {
+                position: absolute;
+                top: 0;
+                right: 0;
+                padding: 0.5rem;
+                opacity: 0.1;
+                color: var(--cor-texto);
+            }
+
+            & .titulo-caixa {
+                margin: 0 0 0.25rem 0;
+                font-size: 0.75rem;
+                font-weight: 500;
+                text-transform: uppercase;
+                color: var(--cor-texto-secundario);
+            }
+
+            & .valor-caixa {
+                margin: 0;
+                font-size: 1.875rem;
+                font-weight: 700;
+            }
+        }
+    }
+}
+
+.conteudo-principal {
+    flex: 1;
+    padding: 1.5rem;
+
+    @media (min-width: 1024px) {
+        height: 100vh;
+        padding: 2rem;
+        overflow-y: auto;
+    }
+
+    & .cabecalho-principal {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+        margin-bottom: 2rem;
+
+        @media (min-width: 640px) {
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        & .titulos-principais {
+            & h2 {
+                margin: 0;
+                font-size: 1.5rem;
+                font-weight: 700;
+            }
+            & p {
+                margin: 0.25rem 0 0 0;
+                font-size: 0.875rem;
+                color: var(--cor-texto-secundario);
+            }
+        }
+        
+        & .accoes-cabecalho {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        & .botao-acao {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--cor-borda);
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+            background-color: var(--cor-fundo-cartao);
+            color: var(--cor-texto);
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+
+            &:hover {
+                background-color: var(--cor-fundo);
+            }
+            
+            @media (max-width: 640px) {
+                padding: 0.5rem;
+                
+                & .texto-botao {
+                    display: none;
+                }
+            }
+        }
+    }
+
+    & .grelha-graficos {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+
+        @media (min-width: 1024px) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        & .cartao-grafico {
+            padding: 1.25rem;
+            border: 1px solid var(--cor-borda-suave);
+            border-radius: 1rem;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+            background-color: var(--cor-fundo-cartao);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+
+            & .titulo-cartao {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                margin: 0 0 1rem 0;
+                font-size: 1rem;
+                font-weight: 600;
+
+                & .indicador-cor {
+                    width: 0.5rem;
+                    height: 0.5rem;
+                    border-radius: 50%;
+                }
+                
+                & .indicador-indigo { background-color: var(--cor-primaria); }
+                & .indicador-esmeralda { background-color: var(--cor-sucesso); }
+            }
+
+            & .recipiente-grafico {
+                width: 100%;
+                height: 18rem;
+                
+                /* Corrigir o texto da tooltip do Recharts em dark mode */
+                & .recharts-default-tooltip {
+                    background-color: var(--cor-fundo-cartao) !important;
+                    border-color: var(--cor-borda) !important;
+                    color: var(--cor-texto) !important;
+                }
+                & .recharts-tooltip-item {
+                    color: var(--cor-texto) !important;
+                }
+            }
+
+            & .nota-rodape {
+                margin: 0.5rem 0 0 0;
+                text-align: center;
+                font-size: 0.75rem;
+                color: var(--cor-texto-secundario);
+            }
+        }
+    }
+
+    & .recipiente-tabela {
+        border: 1px solid var(--cor-borda-suave);
+        border-radius: 1rem;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        background-color: var(--cor-fundo-cartao);
+        overflow: hidden;
+        transition: background-color 0.3s ease, border-color 0.3s ease;
+
+        & .cabecalho-tabela {
+            padding: 1.25rem;
+            border-bottom: 1px solid var(--cor-borda-suave);
+            background-color: var(--cor-borda-tabela);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+
+            & h3 {
+                margin: 0;
+                font-size: 1rem;
+                font-weight: 600;
+            }
+        }
+
+        & .tabela-scroll {
+            overflow-x: auto;
+
+            & table {
+                width: 100%;
+                border-collapse: collapse;
+                text-align: left;
+
+                & th {
+                    padding: 1rem 1.25rem;
+                    border-bottom: 1px solid var(--cor-borda-suave);
+                    font-size: 0.75rem;
+                    font-weight: 500;
+                    text-transform: uppercase;
+                    letter-spacing: 0.05em;
+                    color: var(--cor-texto-secundario);
+                    transition: border-color 0.3s ease;
+                }
+
+                & td {
+                    padding: 1rem 1.25rem;
+                    border-bottom: 1px solid var(--cor-borda-suave);
+                    font-size: 0.875rem;
+                    color: var(--cor-texto-secundario);
+                    transition: border-color 0.3s ease;
+
+                    &.destaque-primario {
+                        font-weight: 500;
+                        color: var(--cor-texto);
+                    }
+
+                    &.destaque-sucesso {
+                        font-weight: 600;
+                        color: var(--cor-sucesso);
+                    }
+                }
+
+                & tr:hover {
+                    background-color: var(--cor-hover-tabela);
+                }
+            }
+        }
+
+        & .etiqueta-estado {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.375rem;
+            padding: 0.25rem 0.625rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 500;
+
+            &.estado-sucesso {
+                background-color: var(--cor-sucesso-fundo);
+                color: var(--cor-sucesso);
+            }
+
+            &.estado-perigo {
+                background-color: var(--cor-perigo-fundo);
+                color: var(--cor-perigo);
+            }
+        }
+
+        & .etiqueta-cluster {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            min-width: 1.5rem;
+            height: 1.5rem;
+            border-radius: 0.375rem;
+            background-color: var(--cor-fundo);
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--cor-texto-secundario);
+            transition: background-color 0.3s ease;
+        }
+
+        & .grupo-pontuacao {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+
+            & .barra-fundo {
+                width: 4rem;
+                height: 0.375rem;
+                border-radius: 9999px;
+                background-color: var(--cor-borda-suave);
+
+                & .barra-preenchimento {
+                    height: 100%;
+                    border-radius: 9999px;
+                }
+                
+                & .cor-vermelho { background-color: var(--cor-perigo); }
+                & .cor-amarelo { background-color: var(--cor-aviso); }
+                & .cor-verde { background-color: var(--cor-sucesso); }
+            }
+
+            & .valor-pontuacao {
+                font-weight: 600;
+                color: var(--cor-texto);
+            }
+        }
+    }
+}
+
+.dica-ferramenta-grafico {
+    padding: 0.75rem;
+    border: 1px solid var(--cor-borda);
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    background-color: var(--cor-fundo-cartao);
+    font-size: 0.875rem;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+
+    & .titulo-dica {
+        margin: 0 0 0.25rem 0;
+        font-weight: 600;
+        color: var(--cor-texto);
+    }
+
+    & .linha-dica {
+        margin: 0;
+        color: var(--cor-texto-secundario);
+
+        & span {
+            font-weight: 500;
+            color: var(--cor-texto);
+        }
+
+        & .texto-verde {
+            color: var(--cor-sucesso);
+        }
+    }
+}
